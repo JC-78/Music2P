@@ -76,16 +76,32 @@
             <input type="submit" value="Upload">
         </form>
     </div> -->
-    <div class="bottom-section {% if caption %}hidden{% endif %}">
+    <!-- <div class="bottom-section {% if caption %}hidden{% endif %}">
         <h1>Music2P</h1>
         <form method="POST" action="/upload" enctype="multipart/form-data">
+            <label for="imageUpload">Choose an image:</label>
             <input type="file" name="file">
+            <label for="musicUpload">Choose a music file (.mp3):</label>
+            <input type="file" name="music" accept=".mp3">
             <br>
             <textarea name="description" placeholder="Describe what kind of album cover do you want"></textarea>
             <br>
             <input type="submit" value="Upload">
         </form>
-    </div>
+    </div> -->
+    <div class="bottom-section {% if caption %}hidden{% endif %}">
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <h1>Music2P</h1>
+        <label for="imageUpload">Choose an image:</label>
+        <input type="file" name="file">
+        <label for="musicUpload">Choose a music file (.mp3):</label>
+        <input type="file" name="music" accept=".mp3">
+        <br>
+        <textarea name="description" placeholder="Describe what kind of album cover do you want"></textarea>
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+</div>
 
     <!-- Section to display the caption -->
     <div class="caption-section">
