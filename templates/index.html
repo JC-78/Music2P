@@ -34,18 +34,105 @@
         input[type="file"] {
             margin-bottom: 10px;
         }
+        .caption-section {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+        }
+
+        .description-section {
+            /* Add spacing between sections if needed */
+            margin-bottom: 20px;
+            background-color: white;
+        }
+
+        .generated-image {
+            max-width: 80%; /* Adjust the image size as needed */
+            max-height: 50vh; /* Adjust the image height as needed */
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="bottom-section">
+    <!-- <div class="bottom-section">
         <h1>Music2P</h1>
         <form method="POST" action="/upload" enctype="multipart/form-data">
             <input type="file" name="file">
             <br>
-            <textarea placeholder="Describe what kind of album cover do you want"></textarea>
+            <textarea name="description" placeholder="Describe what kind of album cover do you want"></textarea>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </div> -->
+    <div class="bottom-section {% if caption %}hidden{% endif %}">
+        <h1>Music2P</h1>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <br>
+            <textarea name="description" placeholder="Describe what kind of album cover do you want"></textarea>
             <br>
             <input type="submit" value="Upload">
         </form>
     </div>
+
+    <!-- Section to display the caption -->
+    <div class="caption-section">
+        <h2>Generated Caption</h2>
+        <p id="captionText">{{ caption }}</p>
+    </div>
+
+    <!-- Section to display the description -->
+    <div class="description-section">
+        <h2>Description</h2>
+        <p id="descriptionText">{{ description }}</p>
+    </div>
+    <div class="image-section">
+        <h2>Generated Image</h2>
+        <img id="generatedImage" class="generated-image" src="{{ url_for('display_image', filename=image) }}" alt="Generated Image">
+    </div>
+
+    <!-- Script to update the caption and description dynamically -->
+    <script>
+        window.onload = function() {
+            const caption = "{{ caption }}";
+            if (caption) {
+                document.querySelector('.bottom-section').classList.add('hidden');
+            }
+        };
+         function updateContent() {
+        const captionElement = document.getElementById('captionText');
+        const descriptionElement = document.getElementById('descriptionText');
+        const imageElement = document.getElementById('generatedImage');
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const captionParam = urlParams.get('caption');
+        const descriptionParam = urlParams.get('description');
+        const imageParam = urlParams.get('image');
+
+        if (captionParam) {
+            captionElement.textContent = captionParam;
+        }
+        if (descriptionParam) {
+            descriptionElement.textContent = descriptionParam;
+        }
+        if (imageParam) {
+            // Set the source of the image to the base64 encoded image
+            imageElement.src = 'data:image/png;base64,' + imageParam;
+        }
+    }
+    updateContent();
+    </script>
 </body>
 </html>
