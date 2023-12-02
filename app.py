@@ -37,7 +37,7 @@ def upload():
     music_file.save(os.path.join(app.config['UPLOAD_FOLDER'], music_filename))
 
     # Send the files to the Colab notebook's API endpoint
-    ngrok_url = 'https://b968-35-247-128-31.ngrok.io/caption'  # Replace with your ngrok URL
+    ngrok_url = 'https://f03c-34-168-255-220.ngrok.io/caption'  # Replace with your ngrok URL
     files = {
         'file': open(os.path.join(app.config['UPLOAD_FOLDER'], image_filename), 'rb'),
         'music': open(os.path.join(app.config['UPLOAD_FOLDER'], music_filename), 'rb')
