@@ -8,4 +8,4 @@ There are two strategies to generate captions. One is 'Music-to-Caption' via BAR
 * ```demo/app.py``` gets the mp3 file and outputs caption by BART. It also generates captions based on an image by BLIP.
 
 # How to use Music2P
-Run colab notebook, get the url generated and paste that into app.py's url variable and run app.py. It will run Music2P on your local host.
+Run ColabToFlask.ipynb colab notebook, get the url generated and paste that into app.py's url variable and run app.py. It will run Music2P on your local host.
